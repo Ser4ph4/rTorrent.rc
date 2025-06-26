@@ -1,5 +1,4 @@
 WAIT 60
-
 [Unit]
 Description=rtorrent (in tmux)
 
