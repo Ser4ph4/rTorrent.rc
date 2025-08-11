@@ -31,7 +31,7 @@ pieces.hash.on_completion.set = no
 schedule = low_diskspace,5,60,close_low_diskspace=100M
 
 # Port range to use for listening.
-port_range = 6875-6875
+port_range = 33110-33110
 
 # Start opening ports at a random position within the port range.
 port_random = no
@@ -91,18 +91,20 @@ throttle.min_peers.normal.set = 39
 throttle.max_peers.normal.set = 40
 throttle.min_peers.seed.set = -1
 throttle.max_peers.seed.set = -1
-throttle.max_downloads.global.set = 150
-throttle.max_uploads.global.set = 150
+throttle.max_downloads.global.set = 100
+throttle.max_uploads.global.set = 250
 throttle.max_downloads.set = 50
 throttle.max_uploads.set = 50
-trackers.numwant.set = 60
+trackers.numwant.set = 100
 dht.mode.set = disable
-network.max_open_sockets.set = 150
+network.max_open_sockets.set = 999
 network.max_open_files.set = 600
-network.http.max_open.set = 50
+network.http.max_open.set = 99
 network.receive_buffer.size.set =  4M
-network.send_buffer.size.set    = 25M
-pieces.memory.max.set = 2400M
+network.send_buffer.size.set    = 100M
+network.http.ssl_verify_host.set = 0
+network.http.ssl_verify_peer.set = 0
+pieces.memory.max.set = 2500M
 pieces.preload.type.set = 2
 pieces.preload.min_size.set = 262144
 pieces.preload.min_rate.set = 5120
