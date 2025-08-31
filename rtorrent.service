@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=forking
 User=pi
-ExecStartPre=/bin/sleep 40
+ExecStartPre=/bin/sleep 20
 ExecStart=/usr/bin/tmux -2 new-session -d -s rtorrent rtorrent
 ExecStop=/usr/bin/tmux send-keys -t rtorrent:rtorrent C-q
 RemainAfterExit=no
