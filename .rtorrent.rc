@@ -15,8 +15,13 @@ check_hash = no
 pieces.hash.on_completion.set = no
 
 # ===================== SALVAMENTO =====================
+# Evita baixar caso disco esteja cheio
 schedule = low_diskspace,5,60,close_low_diskspace=100M
-schedule2 = session_save, 1200, 43200, ((session.save))
+
+# Salva sessão no SSD a cada 3 horas
+schedule2 = session_save,10800,10800,((session.save))
+# Salva sessão final no SSD ao encerrar o rTorrent
+schedule2 = session_final,0,0,((session.save))
 
 # ===================== PORTAS E ENCRIPTAÇÃO =====================
 port_range = 33110-33110
@@ -39,7 +44,7 @@ throttle.max_uploads.global.set   = 50
 trackers.numwant.set = 50
 network.max_open_sockets.set = 200
 network.max_open_files.set   = 200
-network.http.max_open.set    = 30
+network.http.max_open.set    = 20
 network.receive_buffer.size.set = 512K
 network.send_buffer.size.set    = 1M
 network.http.ssl_verify_host.set = 0
@@ -51,4 +56,3 @@ pieces.memory.max.set = 2048M
 pieces.preload.type.set = 1
 pieces.preload.min_size.set = 262144
 pieces.preload.min_rate.set = 4096
-
