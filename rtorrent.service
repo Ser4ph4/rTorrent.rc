@@ -1,3 +1,4 @@
+DEFAULT:
 [Unit]
 Description=rtorrent (in tmux)
 After=network.target
@@ -11,6 +12,27 @@ ExecStop=/usr/bin/tmux send-keys -t rtorrent:rtorrent C-q
 RemainAfterExit=no
 Restart=on-failure
 RestartSec=5s
+
+[Install]
+WantedBy=default.target
+
+
+==========================
+MODIFICADO:
+[Unit]
+Description=rtorrent (in tmux)
+After=mnt-sdb2.mount
+Requires=mnt-sdb2.mount
+ConditionPathIsMountPoint=/mnt/sdb2
+
+[Service]
+Type=forking
+User=pi
+ExecStart=/usr/bin/tmux -2 new-session -d -s rtorrent rtorrent
+ExecStop=/usr/bin/tmux send-keys -t rtorrent:rtorrent C-q
+RemainAfterExit=no
+Restart=on-failure
+RestartSec=15s
 
 [Install]
 WantedBy=default.target
