@@ -1,18 +1,19 @@
 [Unit]
-Description=rtorrent (in tmux)
-After=mnt-sdb2.mount
+Description=rTorrent (OK)
+After=network.target mnt-sdb2.mount
 Requires=mnt-sdb2.mount
 ConditionPathIsMountPoint=/mnt/sdb2
 
 [Service]
 Type=forking
-User=pi
-Environment=TERM=screen
-ExecStart=/usr/bin/tmux -2 new-session -d -s rtorrent rtorrent
-ExecStop=/usr/bin/tmux send-keys -t rtorrent:rtorrent C-q
-RemainAfterExit=no
+KillMode=none
+User=root
+WorkingDirectory=/home/pi
+ExecStartPre=-/bin/rm -f /home/pi/.rtorrent-session/rtorrent.lock
+ExecStart=/usr/bin/screen -dmfa -S rtorrent /usr/bin/rtorrent
+ExecStop=/usr/bin/killall -w -s 2 /usr/bin/rtorrent
 Restart=on-failure
-RestartSec=15s
+RestartSec=5s
 
 [Install]
 WantedBy=default.target
