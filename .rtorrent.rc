@@ -31,3 +31,4 @@ encoding.add = UTF-8
 log.open_file = "rtorrent", "/home/pi/rtorrent.log"
 log.add_output = "critical", "rtorrent"
 log.add_output = "error", "rtorrent"   
+ui.view.default.set = "active"
