@@ -18,9 +18,8 @@ throttle.min_peers.seed.set = 30
 throttle.max_peers.seed.set = 80
 trackers.numwant.set = 80
 protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
-schedule = start_delayed, 40, 0, "load_start=/home/pi/.rtorrent-session/*.torrent"
-schedule = monitor_diskspace, 15, 60, ((close_low_diskspace, 500M))
-schedule2 = session_save, 640, 7800, ((session.save))
+schedule = monitor_diskspace, 15, 60, "close_low_diskspace=500M"
+schedule = session_save, 300, 7500, "session.save="
 pieces.hash.on_completion.set = no
 pieces.hash.on_completion = no
 check_hash = no
@@ -28,6 +27,7 @@ network.http.dns_cache_timeout.set = 25
 network.http.ssl_verify_peer.set = 0
 network.http.ssl_verify_host.set = 0
 scgi_port = 127.0.0.1:5000
+encoding.add = UTF-8
 log.open_file = "rtorrent", "/home/pi/rtorrent.log"
 log.add_output = "critical", "rtorrent"
 log.add_output = "error", "rtorrent"   
