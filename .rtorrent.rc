@@ -1,3 +1,5 @@
+system.daemon.set = true
+session.use_lock.set = no
 directory = /home/pi/Downloads/
 session = /home/pi/.rtorrent-session/
 scgi_port = 127.0.0.1:5000
@@ -5,7 +7,7 @@ dht.mode.set = disable
 encoding.add = UTF-8
 protocol.pex.set = no
 trackers.use_udp.set = no
-pieces.memory.max.set = 2000M
+pieces.memory.max.set = 2300M
 network.xmlrpc.size_limit.set = 6M
 throttle.max_uploads.set = 10
 throttle.max_uploads.global.set = 50
