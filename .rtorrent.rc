@@ -34,3 +34,5 @@ network.max_open_sockets.set = 1024
 pieces.preload.type.set = 2
 pieces.preload.min_size.set = 4194304
 pieces.preload.min_rate.set = 5120
+throttle.global_down.max_rate.set_kb = 0
+throttle.global_up.max_rate.set_kb = 0
