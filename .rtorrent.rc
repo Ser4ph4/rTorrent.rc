@@ -65,5 +65,4 @@ network.port_random.set = no
 network.http.dns_cache_timeout.set = 25
 network.http.ssl_verify_peer.set = 0
 network.http.ssl_verify_host.set = 0
-execute.nothrow = chmod,666,/home/pi/.local/rtorrent.sock
 schedule2 = fix_scgi_perm,10,30,((execute.throw = sh,-c,"chmod 0660 /home/pi/.local/rtorrent.sock 2>/dev/null || true"))
