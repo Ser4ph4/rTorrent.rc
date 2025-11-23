@@ -1,6 +1,7 @@
 [Unit]
-Description=rTorrent (Otimizado Daemon)
-After=network.target mnt-sdb2.mount
+Description=rTorrent Daemon
+After=network-online.target mnt-sdb2.mount
+Wants=network-online.target
 Requires=mnt-sdb2.mount
 ConditionPathIsMountPoint=/mnt/sdb2
 
@@ -10,12 +11,14 @@ User=pi
 Group=pi
 UMask=0002
 WorkingDirectory=/home/pi
-ExecStart=/usr/bin/rtorrent -n -o import=/home/pi/.rtorrent.rc
+ExecStart=/usr/bin/rtorrent -n -D -o import=/home/pi/.rtorrent.rc
 Restart=on-failure
 RestartSec=5
-LimitNOFILE=65536
+LimitNOFILE=1048576        
+LimitNPROC=65536
+LimitMEMLOCK=infinity
 KillMode=process
-Nice=-5
+TimeoutStopSec=60
 
 [Install]
 WantedBy=multi-user.target
