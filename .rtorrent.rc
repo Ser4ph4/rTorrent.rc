@@ -1,3 +1,6 @@
+# === RTORRENT RC ===
+
+# Básico
 system.daemon.set = true
 session.use_lock.set = no
 directory = /home/pi/Downloads/
@@ -6,63 +9,46 @@ scgi_local = /home/pi/.local/rtorrent.sock
 encoding.add = UTF-8
 check_hash = no
 
-# --- OTIMIZAÇÃO DE REDE (GIGABIT) ---
-# Buffers maiores para segurar conexões rápidas de seedboxes
+# Rede
 network.receive_buffer.size.set = 64M
 network.send_buffer.size.set = 16M
-
-# --- O ESCUDO DE RAM (CRUCIAL PARA SUA FONTE) ---
-# Usamos 1.5GB de RAM como cache. O download vai para a RAM, 
-# e o disco grava suavemente em segundo plano.
-pieces.memory.max.set = 2500M
-system.file.allocate.set = 0
-
-# Pré-carregamento otimizado
-pieces.preload.type.set = 1
-pieces.preload.min_size.set = 262144
-pieces.preload.min_rate.set = 5120
-
-# Limites de Arquivos/Sockets (Aumentados para suportar conexões rápidas)
 network.http.max_open.set = 99
 network.max_open_files.set = 4096
 network.max_open_sockets.set = 2048
 network.xmlrpc.size_limit.set = 10M
-
-# --- CONFIGURAÇÃO DE PEERS (DOWNLOAD) ---
-# Private Trackers costumam ter menos peers, mas muito rápidos.
-# Aumentei o teto para você não perder conexão com nenhuma seedbox.
-throttle.min_peers.normal.set = 20
-throttle.max_peers.normal.set = 80
-
-# --- SEEDING (MANTIDO COMO VOCÊ PEDIU) ---
-# Seus ajustes originais de seed
-throttle.min_peers.seed.set = 20
-throttle.max_peers.seed.set = 60
-throttle.max_uploads.set = 12
-throttle.max_uploads.global.set = 60
-
-# Sem limites de velocidade
-throttle.global_down.max_rate.set_kb = 0
-throttle.global_up.max_rate.set_kb = 0
-
-# --- PRIVACIDADE E TRACKERS (MODO PRIVADO ESTRITO) ---
-# Tudo DESLIGADO para respeitar as regras de trackers privados
-dht.mode.set = disable
-protocol.pex.set = no
-trackers.use_udp.set = no
-
-# Pedir mais peers ao tracker de uma vez só
-trackers.numwant.set = 80
-
-# Criptografia
-protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
-
-# Agendamento e Outros
-schedule2 = session_save, 3200, 13200, ((session.save))
-pieces.hash.on_completion.set = no
 network.port_range.set = 33011-33011
 network.port_random.set = no
 network.http.dns_cache_timeout.set = 25
 network.http.ssl_verify_peer.set = 0
 network.http.ssl_verify_host.set = 0
+
+# Peers
+throttle.min_peers.normal.set = 20
+throttle.max_peers.normal.set = 80
+throttle.min_peers.seed.set = 20
+throttle.max_peers.seed.set = 60
+throttle.max_uploads.set = 12
+throttle.max_uploads.global.set = 60
+
+# Velocidade
+throttle.global_down.max_rate.set_kb = 0
+throttle.global_up.max_rate.set_kb = 0
+
+# Privacidade / Trackers
+dht.mode.set = disable
+protocol.pex.set = no
+trackers.use_udp.set = no
+trackers.numwant.set = 80
+protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
+
+# RAM / Arquivos
+pieces.memory.max.set = 2500M
+system.file.allocate.set = 0
+pieces.preload.type.set = 1
+pieces.preload.min_size.set = 262144
+pieces.preload.min_rate.set = 5120
+pieces.hash.on_completion.set = no
+
+# Agendamentos
+schedule2 = session_save, 3200, 13200, ((session.save))
 schedule2 = fix_scgi_perm,10,30,((execute.throw = sh,-c,"chmod 0660 /home/pi/.local/rtorrent.sock 2>/dev/null || true"))
