@@ -31,8 +31,8 @@ throttle.max_uploads.set = 12
 throttle.max_uploads.global.set = 60
 
 # Velocidade
-throttle.global_down.max_rate.set_kb = 0
-throttle.global_up.max_rate.set_kb = 0
+throttle.global_down.max_rate.set_kb = 200000
+throttle.global_up.max_rate.set_kb = 40000
 
 # Privacidade / Trackers
 dht.mode.set = disable
