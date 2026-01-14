@@ -1,6 +1,6 @@
 [Unit]
-Description=rTorrent Daemon
-After=network-online.target mnt-sdb2.mount
+Description=rTorrent Daemon(Flood)
+After=network-online.target mnt-sdb2.mount docker.service
 Wants=network-online.target
 Requires=mnt-sdb2.mount
 ConditionPathIsMountPoint=/mnt/sdb2
@@ -14,7 +14,7 @@ WorkingDirectory=/home/pi
 ExecStart=/usr/bin/rtorrent -n -D -o import=/home/pi/.rtorrent.rc
 Restart=on-failure
 RestartSec=5
-LimitNOFILE=1048576        
+LimitNOFILE=1048576
 LimitNPROC=65536
 LimitMEMLOCK=infinity
 KillMode=process
